@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "event_name": "Aug 2026 Trishuli Flood",
+    "bbox": [
+      85.12,
+      27.92,
+      85.32,
+      28.14
+    ],
+    "event_date": "2026-08-05",
+    "execution_timestamp": "2026-09-30T10:23:50.533950+00:00",
+    "pipeline_version": "1.0.0",
+    "data_sources": {
+      "sentinel1_pre_id": "S1A_IW_GRDH_1SDV_20260724T121500_ORB85",
+      "sentinel1_post_id": "S1A_IW_GRDH_1SDV_20260806T121500_ORB85",
+      "relative_orbit": 85,
+      "orbit_selection_reason": "Selected relative orbit 85 (Ascending). Pre-event: 2026-07-24, Post-event: 2026-08-06 (13-day delta). Matching orbital track ensures identical incidence angles and eliminates false change from terrain geometry.",
+      "sentinel2_scene_id": "S2A_MSIL2A_20260806T045701",
+      "cloud_cover_percent": 78.5,
+      "dem_source": "Copernicus WorldDEM-30 (GLO-30)",
+      "osm_snapshot_date": "2026-07-27T00:00:00Z"
+    },
+    "fallbacks_used": [
+      "Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation"
+    ]
+  },
+  "hazard_summary": {
+    "confidence_thresholds": {
+      "conservative": 0.7,
+      "liberal": 0.35
+    },
+    "permanent_water_area_sqkm": 4.1,
+    "flood_water_area_sqkm": {
+      "conservative": 4.22,
+      "liberal": 4.24
+    },
+    "debris_area_sqkm": {
+      "conservative": 0.15,
+      "liberal": 0.15
+    },
+    "total_hazard_sqkm": {
+      "conservative": 4.37,
+      "liberal": 4.39
+    }
+  },
+  "damage_summary": {
+    "buildings": {
+      "total_assessed": 315,
+      "likely_hit": 286,
+      "possibly_hit": 0,
+      "not_hit": 29,
+      "likely_hit_percent": 90.8
+    },
+    "roads_km": {
+      "total_length_km": 40.92,
+      "likely_hit_km": 40.92,
+      "possibly_hit_km": 0.0,
+      "not_hit_km": 0.0,
+      "likely_hit_percent": 100.0
+    },
+    "bridges": {
+      "total_assessed": 3,
+      "likely_hit": 3,
+      "adjacent_to_corridor": 0,
+      "not_hit": 0
+    },
+    "critical_facilities": {
+      "hospitals_at_risk": [
+        "Battar Hospital"
+      ],
+      "schools_at_risk": []
+    }
+  },
+  "cutoff_analysis": {
+    "total_settlements_analyzed": 7,
+    "destinations_count": 2,
+    "definitely_cut_off": [
+      {
+        "name": "Betrawati Village",
+        "type": "village",
+        "pre_dist_km": 11.88,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      },
+      {
+        "name": "Dhunche Gateway",
+        "type": "village",
+        "pre_dist_km": 17.39,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      },
+      {
+        "name": "Syabrubesi",
+        "type": "hamlet",
+        "pre_dist_km": 20.19,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      },
+      {
+        "name": "Mailung",
+        "type": "village",
+        "pre_dist_km": 14.29,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      },
+      {
+        "name": "Ramche Hamlet",
+        "type": "hamlet",
+        "pre_dist_km": 18.07,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      },
+      {
+        "name": "Ghyangphedi",
+        "type": "hamlet",
+        "pre_dist_km": 22.14,
+        "reason": "All road corridors to Battar Hospital severed by primary flood/debris inundation."
+      }
+    ],
+    "possibly_cut_off": [],
+    "connected_with_detour": [],
+    "pre_event_unconnected": [
+      {
+        "name": "Thangdor Isolation",
+        "type": "isolated_dwelling",
+        "status": "Unknown (Road segment isolated from major medical/municipal hubs pre-event)"
+      }
+    ]
+  },
+  "flowpath_bonus": {
+    "source_point": [
+      28.08,
+      85.22
+    ],
+    "corridor_length_km": 2.71,
+    "settlements_in_path": []
+  },
+  "attributions": [
+    "Contains modified Copernicus Sentinel data 2026.",
+    "Produced using Copernicus WorldDEM-30 Â© DLR e.V. 2010â€“2014 and Â© Airbus Defence and Space GmbH 2014â€“2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.",
+    "Â© OpenStreetMap contributors (ODbL).",
+    "Kuro Siwo dataset cited: Bountos et al., 2024.",
+    "Sen1Floods11 dataset cited: Bonafilia et al., CVPR Workshops 2020.",
+    "Evaluation baseline: European Union, Copernicus Emergency Management Service data (EMSR927)."
+  ],
+  "limitations": [
+    "Revisit time of Sentinel-1/2 (several days) precludes sub-hourly early warning or flash-flood prediction.",
+    "Radar layover, shadow, and steep Himalayan slopes can cause blind spots or false positives.",
+    "Wet snow, saturated soils, and topographic shadows mimic water backscatter in C-band SAR.",
+    "Debris and sediment deposit detection is heuristic change-detection without dedicated labeled training sets.",
+    "10-meter pixel resolution is coarse for single rural huts, footbridges, or narrow mountain paths.",
+    "OpenStreetMap coverage in the Himalaya is incomplete; absence of a road does not guarantee absence on the ground.",
+    "Satellite masks do not provide water depth, flow velocity, or road surface structural integrity.",
+    "This system is an emergency educational prototype, not an officially certified operational life-safety tool."
+  ]
+}
