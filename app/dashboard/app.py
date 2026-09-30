@@ -1165,6 +1165,17 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 def serve_dashboard():
     return DASHBOARD_HTML
 
+@app.get("/api/status")
+@app.get("/health")
+def get_status():
+    return {
+        "status": "online",
+        "app": "Mandi 3D Flood Command Center",
+        "version": "1.0.0",
+        "port": 8000,
+        "results_ready": os.path.exists(RESULTS_PATH)
+    }
+
 @app.get("/api/results")
 def get_results():
     if os.path.exists(RESULTS_PATH):
