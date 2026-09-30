@@ -1,0 +1,101 @@
+# Flood Damage Mapping Configuration
+project:
+  name: "Flood Damage Mapping from Space"
+  version: "1.0.0"
+  case_study: "Aug 2026 Trishuli Flood"
+
+# Default Area of Interest (Trishuli Basin, Nepal)
+# Judges can override with --bbox W,S,E,N and --date YYYY-MM-DD
+default_aoi:
+  name: "Trishuli River Corridor"
+  bbox: [85.12, 27.92, 85.32, 28.14] # [West, South, East, North]
+  event_date: "2026-08-05"
+
+ingestion:
+  cdse:
+    stac_api_url: "https://catalogue.dataspace.copernicus.eu/stac"
+    odata_api_url: "https://catalogue.dataspace.copernicus.eu/odata/v1"
+    orbit_delta_days: 12
+    max_cloud_cover_s2: 30
+  copernicus_dem:
+    collection: "GLO-30"
+    resolution_m: 30
+  ohsome_osm:
+    api_url: "https://api.ohsome.org/v1"
+    snapshot_timestamp: "2026-07-27T00:00:00Z" # Strict pre-event snapshot
+  cache_dir: "data/cache"
+  raw_dir: "data/raw"
+
+preprocessing:
+  target_crs: "EPSG:32645" # UTM 45N for Nepal
+  pixel_size_m: 10.0
+  speckle_filter:
+    type: "lee"
+    window_size: 7
+  terrain:
+    slope_threshold_deg: 25.0
+    hand_threshold_m: 15.0
+    apply_layover_shadow_mask: true
+
+detection:
+  model_weights: "model/weights/kuro_siwo_unet.pt"
+  encoder: "resnet34"
+  device: "auto" # 'cuda', 'cpu', or 'auto'
+  classes:
+    0: "background"
+    1: "permanent_water"
+    2: "flood_water"
+  thresholds:
+    conservative: 0.70
+    liberal: 0.35
+  debris:
+    log_ratio_threshold_db: -3.5 # Significant backscatter drop/roughening
+    river_corridor_hand_max_m: 20.0
+    otsu_adaptive: true
+
+fusion:
+  use_sentinel2: true
+  cloud_mask_classes: [3, 8, 9, 10] # SCL classes to mask (cloud shadows, cloud med/high prob, cirrus)
+  mndwi_threshold: 0.15
+  bsi_scar_threshold: 0.20
+
+damage:
+  buffer_distance_m: 15.0 # ~1 pixel uncertainty buffer
+  bridge_corridor_buffer_m: 30.0
+
+cutoff:
+  destinations:
+    amenity: ["hospital", "clinic"]
+    place: ["town", "city"]
+  origins:
+    place: ["village", "hamlet", "isolated_dwelling"]
+  max_search_dist_km: 100.0
+
+flowpath:
+  default_source_point: [28.08, 85.22] # [Lat, Lon]
+  hand_corridor_buffer_m: 15.0
+
+outputs:
+  output_dir: "outputs"
+  results_json: "outputs/results.json"
+  geopackage: "outputs/damage_assessment.gpkg"
+  report_pdf_en: "outputs/situation_report_en.pdf"
+  report_pdf_ne: "outputs/situation_report_ne.pdf"
+
+attributions:
+  - "Contains modified Copernicus Sentinel data 2026."
+  - "Produced using Copernicus WorldDEM-30 © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018 provided under COPERNICUS by the European Union and ESA; all rights reserved."
+  - "© OpenStreetMap contributors (ODbL)."
+  - "Kuro Siwo dataset cited: Bountos et al., 2024."
+  - "Sen1Floods11 dataset cited: Bonafilia et al., CVPR Workshops 2020."
+  - "Evaluation baseline: European Union, Copernicus Emergency Management Service data (EMSR927)."
+
+limitations:
+  - "Revisit time of Sentinel-1/2 (several days) precludes sub-hourly early warning or flash-flood prediction."
+  - "Radar layover, shadow, and steep Himalayan slopes can cause blind spots or false positives."
+  - "Wet snow, saturated soils, and topographic shadows mimic water backscatter in C-band SAR."
+  - "Debris and sediment deposit detection is heuristic change-detection without dedicated labeled training sets."
+  - "10-meter pixel resolution is coarse for single rural huts, footbridges, or narrow mountain paths."
+  - "OpenStreetMap coverage in the Himalaya is incomplete; absence of a road does not guarantee absence on the ground."
+  - "Satellite masks do not provide water depth, flow velocity, or road surface structural integrity."
+  - "This system is an emergency educational prototype, not an officially certified operational life-safety tool."

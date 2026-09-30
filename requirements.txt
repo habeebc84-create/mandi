@@ -1,0 +1,28 @@
+# Core Scientific & Geospatial
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+shapely>=2.0.0
+geopandas>=1.0.0
+rasterio>=1.3.0
+pyproj>=3.6.0
+networkx>=3.1
+
+# Deep Learning & Vision
+torch>=2.0.0
+torchvision>=0.15.0
+scikit-learn>=1.3.0
+pillow>=10.0.0
+
+# Ingestion, APIs, Configs
+requests>=2.31.0
+pyyaml>=6.0.0
+jsonschema>=4.20.0
+tqdm>=4.66.0
+
+# Reporting & Visualization
+jinja2>=3.1.2
+reportlab>=4.0.0
+matplotlib>=3.8.0
+fastapi>=0.110.0
+uvicorn>=0.28.0

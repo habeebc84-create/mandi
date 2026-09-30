@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<title>आपतकालीन बाढी क्षति तथा पहुँच विच्छेद प्रतिवेदन</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+    color: #1a202c;
+    line-height: 1.6;
+    margin: 25px;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 3px solid #b91c1c;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #991b1b;
+    margin: 0;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    flex: 1;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #b91c1c;
+  }
+  .kpi-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4b5563;
+  }
+  h2 {
+    font-size: 16px;
+    color: #1e293b;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+  }
+  .alert-box {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+  }
+  .limitations-box {
+    background: #f1f5f9;
+    border-left: 4px solid #64748b;
+    padding: 10px 14px;
+    font-size: 11px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1 class="title">आपतकालीन बाढी क्षति तथा पहुँच विच्छेद प्रतिवेदन</h1>
+    <div class="subtitle">Aug 2026 Trishuli Flood &bull; त्रिशूली नदी क्षेत्र</div>
+  </div>
+  <div style="text-align: right; font-size: 11px; color: #64748b;">
+    <div><strong>घटना मिति:</strong> 2026-08-07</div>
+    <div><strong>विश्लेषण समय:</strong> 2026-09-30T09:54:28</div>
+  </div>
+</div>
+
+<div class="meta-grid">
+  <div class="meta-item">
+    <strong>अध्ययन क्षेत्र (BBOX)</strong>
+    [85.15, 27.95, 85.3, 28.1]
+  </div>
+  <div class="meta-item">
+    <strong>प्रमुख राडार सेन्सर (SAR)</strong>
+    Sentinel-1 IW GRD (कक्ष 85)
+  </div>
+  <div class="meta-item">
+    <strong>प्रकाशीय सेन्सर (Optical)</strong>
+    S2A_MSIL2A_20260806T045701 (78.5% बादल)
+  </div>
+  <div class="meta-item">
+    <strong>खुला सडक नक्सा स्न्यापसट</strong>
+    2026-07-27 (घटना पूर्व)
+  </div>
+</div>
+
+<div class="alert-box">
+  <strong>भू-उपग्रह छनोट विवरण:</strong> Selected relative orbit 85 (Ascending). Pre-event: 2026-07-26, Post-event: 2026-08-08 (13-day delta). Matching orbital track ensures identical incidence angles and eliminates false change from terrain geometry.
+  
+    <br><strong>प्रणालीगत विकल्प:</strong> Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation
+  
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-num">278</div>
+    <div class="kpi-label">प्रभावित घरधुरी (88.3%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">32.5 कि.मि.</div>
+    <div class="kpi-label">अवरुद्ध सडक (100.0%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">3</div>
+    <div class="kpi-label">प्रभावित पुल (0 जोखिममा)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">6</div>
+    <div class="kpi-label">सडक सम्पर्क विच्छेद भएका बस्तीहरू</div>
+  </div>
+</div>
+
+<h2>१. बाढी तथा गेग्रान (Debris) प्रभावित क्षेत्र</h2>
+<table>
+  <thead>
+    <tr>
+      <th>जोखिम सूचक</th>
+      <th>कडा मापदण्ड (Conservative &ge;७०%)</th>
+      <th>खुला मापदण्ड (Liberal &ge;३५%)</th>
+      <th>विश्लेषण विधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>बाढी जलमग्नता</strong></td>
+      <td>4.22 वर्ग कि.मि.</td>
+      <td>4.24 वर्ग कि.मि.</td>
+      <td>Kuro Siwo U-Net + S2 MNDWI पुष्टि</td>
+    </tr>
+    <tr>
+      <td><strong>गेग्रान तथा पहिरो थुप्रिएको क्षेत्र</strong></td>
+      <td>0.15 वर्ग कि.मि.</td>
+      <td>0.15 वर्ग कि.मि.</td>
+      <td>SAR ब्याकस्क्याटर परिवर्तन (Log-ratio) + HAND फिल्टर</td>
+    </tr>
+    <tr>
+      <td><strong>स्थायी नदी सतह</strong></td>
+      <td colspan="2">4.1 वर्ग कि.मि.</td>
+      <td>Copernicus DEM तथा पूर्व-बाढी बेसलाइन</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>२. सडक सम्पर्क तथा अलग्गिएका बस्तीहरूको अवस्था (Cut-Off Analysis)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>बस्ती / समुदाय</th>
+      <th>घटना पूर्व सडक दूरी</th>
+      <th>वर्तमान अवस्था</th>
+      <th>विवरण</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td><strong>Betrawati Village</strong> (village)</td>
+      <td>9.11 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Dhunche Gateway</strong> (village)</td>
+      <td>12.98 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Syabrubesi</strong> (hamlet)</td>
+      <td>14.9 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Mailung</strong> (village)</td>
+      <td>10.82 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Ramche Hamlet</strong> (hamlet)</td>
+      <td>16.28 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Ghyangphedi</strong> (hamlet)</td>
+      <td>19.17 कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    
+    
+    
+    <tr>
+      <td><strong>Thangdor Isolation</strong></td>
+      <td>लागु नहुने</td>
+      <td><span style="color:#64748b;">अज्ञात (Unknown)</span></td>
+      <td>Unknown (Road segment isolated from major medical/municipal hubs pre-event) (OSM तथ्याङ्क अभाव)</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<h2>३. बहाव मार्ग तथा तटीय बस्ती पहिचान (Bonus Flow-Path Trace)</h2>
+<div style="font-size: 12px; margin-bottom: 15px;">
+  <strong>D8 उत्पत्ति विन्दु:</strong> [28.08, 85.22] &bull; 
+  <strong>बहाव लम्बाइ:</strong> 0.8 कि.मि. &bull;
+  <strong>तटीय बस्तीहरू:</strong> 
+</div>
+
+<div class="limitations-box">
+  <strong>प्राविधिक सीमाहरू तथा सावधानीहरू (Technical Limitations):</strong>
+  <ul>
+    
+    <li>Revisit time of Sentinel-1/2 (several days) precludes sub-hourly early warning or flash-flood prediction.</li>
+    
+    <li>Radar layover, shadow, and steep Himalayan slopes can cause blind spots or false positives.</li>
+    
+    <li>Wet snow, saturated soils, and topographic shadows mimic water backscatter in C-band SAR.</li>
+    
+    <li>Debris and sediment deposit detection is heuristic change-detection without dedicated labeled training sets.</li>
+    
+    <li>10-meter pixel resolution is coarse for single rural huts, footbridges, or narrow mountain paths.</li>
+    
+    <li>OpenStreetMap coverage in the Himalaya is incomplete; absence of a road does not guarantee absence on the ground.</li>
+    
+    <li>Satellite masks do not provide water depth, flow velocity, or road surface structural integrity.</li>
+    
+    <li>This system is an emergency educational prototype, not an officially certified operational life-safety tool.</li>
+    
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>आवश्यक प्रतिलिपि अधिकार तथा डेटा स्रोतहरू (Attributions):</strong><br>
+  
+  &bull; Contains modified Copernicus Sentinel data 2026.<br>
+  
+  &bull; Produced using Copernicus WorldDEM-30 Â© DLR e.V. 2010â€“2014 and Â© Airbus Defence and Space GmbH 2014â€“2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.<br>
+  
+  &bull; Â© OpenStreetMap contributors (ODbL).<br>
+  
+  &bull; Kuro Siwo dataset cited: Bountos et al., 2024.<br>
+  
+  &bull; Sen1Floods11 dataset cited: Bonafilia et al., CVPR Workshops 2020.<br>
+  
+  &bull; Evaluation baseline: European Union, Copernicus Emergency Management Service data (EMSR927).<br>
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FloodDamageMappingResults",
+  "type": "object",
+  "required": [
+    "metadata",
+    "hazard_summary",
+    "damage_summary",
+    "cutoff_analysis",
+    "attributions",
+    "limitations"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["bbox", "event_date", "execution_timestamp", "data_sources"],
+      "properties": {
+        "event_name": { "type": "string" },
+        "bbox": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[West, South, East, North]"
+        },
+        "event_date": { "type": "string", "format": "date" },
+        "execution_timestamp": { "type": "string" },
+        "pipeline_version": { "type": "string" },
+        "data_sources": {
+          "type": "object",
+          "properties": {
+            "sentinel1_pre_id": { "type": "string" },
+            "sentinel1_post_id": { "type": "string" },
+            "relative_orbit": { "type": ["integer", "null"] },
+            "orbit_selection_reason": { "type": "string" },
+            "sentinel2_scene_id": { "type": ["string", "null"] },
+            "cloud_cover_percent": { "type": ["number", "null"] },
+            "dem_source": { "type": "string" },
+            "osm_snapshot_date": { "type": "string" }
+          },
+          "required": ["dem_source", "osm_snapshot_date"]
+        },
+        "fallbacks_used": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "hazard_summary": {
+      "type": "object",
+      "required": [
+        "flood_water_area_sqkm",
+        "permanent_water_area_sqkm",
+        "debris_area_sqkm",
+        "confidence_thresholds"
+      ],
+      "properties": {
+        "confidence_thresholds": {
+          "type": "object",
+          "properties": {
+            "conservative": { "type": "number" },
+            "liberal": { "type": "number" }
+          },
+          "required": ["conservative", "liberal"]
+        },
+        "permanent_water_area_sqkm": { "type": "number" },
+        "flood_water_area_sqkm": {
+          "type": "object",
+          "properties": {
+            "conservative": { "type": "number" },
+            "liberal": { "type": "number" }
+          },
+          "required": ["conservative", "liberal"]
+        },
+        "debris_area_sqkm": {
+          "type": "object",
+          "properties": {
+            "conservative": { "type": "number" },
+            "liberal": { "type": "number" }
+          },
+          "required": ["conservative", "liberal"]
+        },
+        "total_hazard_sqkm": {
+          "type": "object",
+          "properties": {
+            "conservative": { "type": "number" },
+            "liberal": { "type": "number" }
+          }
+        }
+      }
+    },
+    "damage_summary": {
+      "type": "object",
+      "required": ["buildings", "roads_km", "bridges"],
+      "properties": {
+        "buildings": {
+          "type": "object",
+          "required": ["total_assessed", "likely_hit", "possibly_hit", "not_hit"],
+          "properties": {
+            "total_assessed": { "type": "integer" },
+            "likely_hit": { "type": "integer" },
+            "possibly_hit": { "type": "integer" },
+            "not_hit": { "type": "integer" },
+            "likely_hit_percent": { "type": "number" }
+          }
+        },
+        "roads_km": {
+          "type": "object",
+          "required": ["total_length_km", "likely_hit_km", "possibly_hit_km", "not_hit_km"],
+          "properties": {
+            "total_length_km": { "type": "number" },
+            "likely_hit_km": { "type": "number" },
+            "possibly_hit_km": { "type": "number" },
+            "not_hit_km": { "type": "number" },
+            "likely_hit_percent": { "type": "number" }
+          }
+        },
+        "bridges": {
+          "type": "object",
+          "required": ["total_assessed", "likely_hit", "adjacent_to_corridor", "not_hit"],
+          "properties": {
+            "total_assessed": { "type": "integer" },
+            "likely_hit": { "type": "integer" },
+            "adjacent_to_corridor": { "type": "integer" },
+            "not_hit": { "type": "integer" }
+          }
+        },
+        "critical_facilities": {
+          "type": "object",
+          "properties": {
+            "hospitals_at_risk": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "schools_at_risk": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "cutoff_analysis": {
+      "type": "object",
+      "required": [
+        "total_settlements_analyzed",
+        "definitely_cut_off",
+        "possibly_cut_off",
+        "connected_with_detour",
+        "pre_event_unconnected"
+      ],
+      "properties": {
+        "total_settlements_analyzed": { "type": "integer" },
+        "destinations_count": { "type": "integer" },
+        "definitely_cut_off": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "pre_dist_km": { "type": "number" },
+              "reason": { "type": "string" }
+            },
+            "required": ["name"]
+          }
+        },
+        "possibly_cut_off": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "pre_dist_km": { "type": "number" },
+              "reason": { "type": "string" }
+            },
+            "required": ["name"]
+          }
+        },
+        "connected_with_detour": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "pre_dist_km": { "type": "number" },
+              "post_dist_km": { "type": "number" },
+              "increase_km": { "type": "number" },
+              "percent_increase": { "type": "number" }
+            },
+            "required": ["name", "pre_dist_km", "post_dist_km"]
+          }
+        },
+        "pre_event_unconnected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "status": { "type": "string" }
+            },
+            "required": ["name", "status"]
+          }
+        }
+      }
+    },
+    "flowpath_bonus": {
+      "type": "object",
+      "properties": {
+        "source_point": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "corridor_length_km": { "type": "number" },
+        "settlements_in_path": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "attributions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

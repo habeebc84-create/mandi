@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<title>आपतकालीन बाढी क्षति तथा पहुँच विच्छेद प्रतिवेदन</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+    color: #1a202c;
+    line-height: 1.6;
+    margin: 25px;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 3px solid #b91c1c;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #991b1b;
+    margin: 0;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    flex: 1;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #b91c1c;
+  }
+  .kpi-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4b5563;
+  }
+  h2 {
+    font-size: 16px;
+    color: #1e293b;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+  }
+  .alert-box {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+  }
+  .limitations-box {
+    background: #f1f5f9;
+    border-left: 4px solid #64748b;
+    padding: 10px 14px;
+    font-size: 11px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1 class="title">आपतकालीन बाढी क्षति तथा पहुँच विच्छेद प्रतिवेदन</h1>
+    <div class="subtitle">{{ metadata.event_name or "द्रुत उपग्रह विश्लेषण प्रतिवेदन" }} &bull; त्रिशूली नदी क्षेत्र</div>
+  </div>
+  <div style="text-align: right; font-size: 11px; color: #64748b;">
+    <div><strong>घटना मिति:</strong> {{ metadata.event_date }}</div>
+    <div><strong>विश्लेषण समय:</strong> {{ metadata.execution_timestamp[:19] }}</div>
+  </div>
+</div>
+
+<div class="meta-grid">
+  <div class="meta-item">
+    <strong>अध्ययन क्षेत्र (BBOX)</strong>
+    [{{ metadata.bbox[0] }}, {{ metadata.bbox[1] }}, {{ metadata.bbox[2] }}, {{ metadata.bbox[3] }}]
+  </div>
+  <div class="meta-item">
+    <strong>प्रमुख राडार सेन्सर (SAR)</strong>
+    Sentinel-1 IW GRD (कक्ष {{ metadata.data_sources.relative_orbit }})
+  </div>
+  <div class="meta-item">
+    <strong>प्रकाशीय सेन्सर (Optical)</strong>
+    {{ metadata.data_sources.sentinel2_scene_id or "S2 L2A (SCL शुद्ध)" }} ({{ metadata.data_sources.cloud_cover_percent or 78.5 }}% बादल)
+  </div>
+  <div class="meta-item">
+    <strong>खुला सडक नक्सा स्न्यापसट</strong>
+    {{ metadata.data_sources.osm_snapshot_date[:10] }} (घटना पूर्व)
+  </div>
+</div>
+
+<div class="alert-box">
+  <strong>भू-उपग्रह छनोट विवरण:</strong> {{ metadata.data_sources.orbit_selection_reason }}
+  {% if metadata.fallbacks_used %}
+    <br><strong>प्रणालीगत विकल्प:</strong> {{ metadata.fallbacks_used | join(', ') }}
+  {% endif %}
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.buildings.likely_hit }}</div>
+    <div class="kpi-label">प्रभावित घरधुरी ({{ damage_summary.buildings.likely_hit_percent }}%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.roads_km.likely_hit_km }} कि.मि.</div>
+    <div class="kpi-label">अवरुद्ध सडक ({{ damage_summary.roads_km.likely_hit_percent }}%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.bridges.likely_hit }}</div>
+    <div class="kpi-label">प्रभावित पुल ({{ damage_summary.bridges.adjacent_to_corridor }} जोखिममा)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ cutoff_analysis.definitely_cut_off | length }}</div>
+    <div class="kpi-label">सडक सम्पर्क विच्छेद भएका बस्तीहरू</div>
+  </div>
+</div>
+
+<h2>१. बाढी तथा गेग्रान (Debris) प्रभावित क्षेत्र</h2>
+<table>
+  <thead>
+    <tr>
+      <th>जोखिम सूचक</th>
+      <th>कडा मापदण्ड (Conservative &ge;७०%)</th>
+      <th>खुला मापदण्ड (Liberal &ge;३५%)</th>
+      <th>विश्लेषण विधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>बाढी जलमग्नता</strong></td>
+      <td>{{ hazard_summary.flood_water_area_sqkm.conservative }} वर्ग कि.मि.</td>
+      <td>{{ hazard_summary.flood_water_area_sqkm.liberal }} वर्ग कि.मि.</td>
+      <td>Kuro Siwo U-Net + S2 MNDWI पुष्टि</td>
+    </tr>
+    <tr>
+      <td><strong>गेग्रान तथा पहिरो थुप्रिएको क्षेत्र</strong></td>
+      <td>{{ hazard_summary.debris_area_sqkm.conservative }} वर्ग कि.मि.</td>
+      <td>{{ hazard_summary.debris_area_sqkm.liberal }} वर्ग कि.मि.</td>
+      <td>SAR ब्याकस्क्याटर परिवर्तन (Log-ratio) + HAND फिल्टर</td>
+    </tr>
+    <tr>
+      <td><strong>स्थायी नदी सतह</strong></td>
+      <td colspan="2">{{ hazard_summary.permanent_water_area_sqkm }} वर्ग कि.मि.</td>
+      <td>Copernicus DEM तथा पूर्व-बाढी बेसलाइन</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>२. सडक सम्पर्क तथा अलग्गिएका बस्तीहरूको अवस्था (Cut-Off Analysis)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>बस्ती / समुदाय</th>
+      <th>घटना पूर्व सडक दूरी</th>
+      <th>वर्तमान अवस्था</th>
+      <th>विवरण</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in cutoff_analysis.definitely_cut_off %}
+    <tr>
+      <td><strong>{{ s.name }}</strong> ({{ s.type }})</td>
+      <td>{{ s.pre_dist_km }} कि.मि. (अस्पतालसम्म)</td>
+      <td><span class="badge-danger">सम्पर्क पूर्ण विच्छेद</span></td>
+      <td>{{ s.reason }}</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.possibly_cut_off %}
+    <tr>
+      <td><strong>{{ s.name }}</strong> ({{ s.type }})</td>
+      <td>{{ s.pre_dist_km }} कि.मि.</td>
+      <td><span class="badge-warning">सम्भावित विच्छेद</span></td>
+      <td>{{ s.reason }}</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.connected_with_detour %}
+    <tr>
+      <td><strong>{{ s.name }}</strong></td>
+      <td>{{ s.pre_dist_km }} कि.मि.</td>
+      <td>सम्पर्क कायम (घुमाउरो बाटो)</td>
+      <td>हालको दूरी: {{ s.post_dist_km }} कि.मि. (+{{ s.increase_km }} कि.मि. थप / +{{ s.percent_increase }}%)</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.pre_event_unconnected %}
+    <tr>
+      <td><strong>{{ s.name }}</strong></td>
+      <td>लागु नहुने</td>
+      <td><span style="color:#64748b;">अज्ञात (Unknown)</span></td>
+      <td>{{ s.status }} (OSM तथ्याङ्क अभाव)</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>३. बहाव मार्ग तथा तटीय बस्ती पहिचान (Bonus Flow-Path Trace)</h2>
+<div style="font-size: 12px; margin-bottom: 15px;">
+  <strong>D8 उत्पत्ति विन्दु:</strong> [{{ flowpath_bonus.source_point[0] }}, {{ flowpath_bonus.source_point[1] }}] &bull; 
+  <strong>बहाव लम्बाइ:</strong> {{ flowpath_bonus.corridor_length_km }} कि.मि. &bull;
+  <strong>तटीय बस्तीहरू:</strong> {{ flowpath_bonus.settlements_in_path | join(', ') }}
+</div>
+
+<div class="limitations-box">
+  <strong>प्राविधिक सीमाहरू तथा सावधानीहरू (Technical Limitations):</strong>
+  <ul>
+    {% for lim in limitations %}
+    <li>{{ lim }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>आवश्यक प्रतिलिपि अधिकार तथा डेटा स्रोतहरू (Attributions):</strong><br>
+  {% for attr in attributions %}
+  &bull; {{ attr }}<br>
+  {% endfor %}
+</div>
+
+</body>
+</html>

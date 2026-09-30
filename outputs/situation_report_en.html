@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Disaster Situation Report: Flood Damage & Isolation</title>
+<style>
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1a202c;
+    line-height: 1.5;
+    margin: 25px;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 3px solid #b91c1c;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #991b1b;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    flex: 1;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #b91c1c;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4b5563;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 15px;
+    color: #1e293b;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+  }
+  .alert-box {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+  }
+  .limitations-box {
+    background: #f1f5f9;
+    border-left: 4px solid #64748b;
+    padding: 10px 14px;
+    font-size: 11px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1 class="title">Disaster Situation Report: Flood Impact & Isolation</h1>
+    <div class="subtitle">Aug 2026 Trishuli Flood &bull; Trishuli Corridor</div>
+  </div>
+  <div style="text-align: right; font-size: 11px; color: #64748b;">
+    <div><strong>Event Date:</strong> 2026-08-07</div>
+    <div><strong>Generated:</strong> 2026-09-30T09:54:28</div>
+  </div>
+</div>
+
+<div class="meta-grid">
+  <div class="meta-item">
+    <strong>AOI Bounding Box</strong>
+    [85.15, 27.95, 85.3, 28.1]
+  </div>
+  <div class="meta-item">
+    <strong>Primary SAR Sensor</strong>
+    Sentinel-1 IW GRD (Orb 85)
+  </div>
+  <div class="meta-item">
+    <strong>Secondary Optical</strong>
+    S2A_MSIL2A_20260806T045701 (78.5% Cloud)
+  </div>
+  <div class="meta-item">
+    <strong>OSM Baseline Snapshot</strong>
+    2026-07-27 (Pre-event)
+  </div>
+</div>
+
+<div class="alert-box">
+  <strong>Satellite Pair Selection Log:</strong> Selected relative orbit 85 (Ascending). Pre-event: 2026-07-26, Post-event: 2026-08-08 (13-day delta). Matching orbital track ensures identical incidence angles and eliminates false change from terrain geometry.
+  
+    <br><strong>Operational Fallbacks:</strong> Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation
+  
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-num">278</div>
+    <div class="kpi-label">Buildings Likely Hit (88.3%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">32.5 km</div>
+    <div class="kpi-label">Roads Severed (100.0%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">3</div>
+    <div class="kpi-label">Bridges Struck (0 at risk)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">6</div>
+    <div class="kpi-label">Settlements Cut Off</div>
+  </div>
+</div>
+
+<h2>1. Hazard Extent Delineation (Radar & Optical Fusion)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Hazard Component</th>
+      <th>Conservative Sensitivity (&ge;70%)</th>
+      <th>Liberal Sensitivity (&ge;35%)</th>
+      <th>Methodology</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Flood Inundation</strong></td>
+      <td>4.22 km&sup2;</td>
+      <td>4.24 km&sup2;</td>
+      <td>Kuro Siwo U-Net + S2 MNDWI Cloud-free Confirmation</td>
+    </tr>
+    <tr>
+      <td><strong>Debris & Sediment Scars</strong></td>
+      <td>0.15 km&sup2;</td>
+      <td>0.15 km&sup2;</td>
+      <td>Log-ratio Backscatter Change + HAND Corridor Filter</td>
+    </tr>
+    <tr>
+      <td><strong>Permanent Water Base</strong></td>
+      <td colspan="2">4.1 km&sup2;</td>
+      <td>Copernicus DEM & SAR Baseline Drainage Channel</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2. Road Network Reachability & Isolation (Pre vs. Post Flood)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Settlement / Community</th>
+      <th>Pre-event Route</th>
+      <th>Status</th>
+      <th>Detour / Severance Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td><strong>Betrawati Village</strong> (village)</td>
+      <td>9.11 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Dhunche Gateway</strong> (village)</td>
+      <td>12.98 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Syabrubesi</strong> (hamlet)</td>
+      <td>14.9 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Mailung</strong> (village)</td>
+      <td>10.82 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Ramche Hamlet</strong> (hamlet)</td>
+      <td>16.28 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    <tr>
+      <td><strong>Ghyangphedi</strong> (hamlet)</td>
+      <td>19.17 km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>All road corridors to Bidur Town Center severed by primary flood/debris inundation.</td>
+    </tr>
+    
+    
+    
+    
+    <tr>
+      <td><strong>Thangdor Isolation</strong></td>
+      <td>N/A</td>
+      <td><span style="color:#64748b;">UNKNOWN</span></td>
+      <td>Unknown (Road segment isolated from major medical/municipal hubs pre-event)</td>
+    </tr>
+    
+  </tbody>
+</table>
+
+<h2>3. Flow-Path Corridor Bonus Trace</h2>
+<div style="font-size: 12px; margin-bottom: 15px;">
+  <strong>D8 Origin Point:</strong> [28.08, 85.22] &bull; 
+  <strong>Downstream Distance:</strong> 0.8 km &bull;
+  <strong>Settlements in Path:</strong> 
+</div>
+
+<div class="limitations-box">
+  <strong>Technical Limitations & Operational Caveats (Mandatory Disclosure):</strong>
+  <ul>
+    
+    <li>Revisit time of Sentinel-1/2 (several days) precludes sub-hourly early warning or flash-flood prediction.</li>
+    
+    <li>Radar layover, shadow, and steep Himalayan slopes can cause blind spots or false positives.</li>
+    
+    <li>Wet snow, saturated soils, and topographic shadows mimic water backscatter in C-band SAR.</li>
+    
+    <li>Debris and sediment deposit detection is heuristic change-detection without dedicated labeled training sets.</li>
+    
+    <li>10-meter pixel resolution is coarse for single rural huts, footbridges, or narrow mountain paths.</li>
+    
+    <li>OpenStreetMap coverage in the Himalaya is incomplete; absence of a road does not guarantee absence on the ground.</li>
+    
+    <li>Satellite masks do not provide water depth, flow velocity, or road surface structural integrity.</li>
+    
+    <li>This system is an emergency educational prototype, not an officially certified operational life-safety tool.</li>
+    
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>Required Attributions:</strong><br>
+  
+  &bull; Contains modified Copernicus Sentinel data 2026.<br>
+  
+  &bull; Produced using Copernicus WorldDEM-30 Â© DLR e.V. 2010â€“2014 and Â© Airbus Defence and Space GmbH 2014â€“2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.<br>
+  
+  &bull; Â© OpenStreetMap contributors (ODbL).<br>
+  
+  &bull; Kuro Siwo dataset cited: Bountos et al., 2024.<br>
+  
+  &bull; Sen1Floods11 dataset cited: Bonafilia et al., CVPR Workshops 2020.<br>
+  
+  &bull; Evaluation baseline: European Union, Copernicus Emergency Management Service data (EMSR927).<br>
+  
+</div>
+
+</body>
+</html>

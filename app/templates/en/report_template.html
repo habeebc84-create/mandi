@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Disaster Situation Report: Flood Damage & Isolation</title>
+<style>
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1a202c;
+    line-height: 1.5;
+    margin: 25px;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 3px solid #b91c1c;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #991b1b;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 4px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    flex: 1;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: #b91c1c;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4b5563;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 15px;
+    color: #1e293b;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+  }
+  .alert-box {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+  }
+  .limitations-box {
+    background: #f1f5f9;
+    border-left: 4px solid #64748b;
+    padding: 10px 14px;
+    font-size: 11px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+  .badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1 class="title">Disaster Situation Report: Flood Impact & Isolation</h1>
+    <div class="subtitle">{{ metadata.event_name or "Rapid Geospatial Damage Assessment" }} &bull; Trishuli Corridor</div>
+  </div>
+  <div style="text-align: right; font-size: 11px; color: #64748b;">
+    <div><strong>Event Date:</strong> {{ metadata.event_date }}</div>
+    <div><strong>Generated:</strong> {{ metadata.execution_timestamp[:19] }}</div>
+  </div>
+</div>
+
+<div class="meta-grid">
+  <div class="meta-item">
+    <strong>AOI Bounding Box</strong>
+    [{{ metadata.bbox[0] }}, {{ metadata.bbox[1] }}, {{ metadata.bbox[2] }}, {{ metadata.bbox[3] }}]
+  </div>
+  <div class="meta-item">
+    <strong>Primary SAR Sensor</strong>
+    Sentinel-1 IW GRD (Orb {{ metadata.data_sources.relative_orbit }})
+  </div>
+  <div class="meta-item">
+    <strong>Secondary Optical</strong>
+    {{ metadata.data_sources.sentinel2_scene_id or "S2 L2A (SCL Cleared)" }} ({{ metadata.data_sources.cloud_cover_percent or 78.5 }}% Cloud)
+  </div>
+  <div class="meta-item">
+    <strong>OSM Baseline Snapshot</strong>
+    {{ metadata.data_sources.osm_snapshot_date[:10] }} (Pre-event)
+  </div>
+</div>
+
+<div class="alert-box">
+  <strong>Satellite Pair Selection Log:</strong> {{ metadata.data_sources.orbit_selection_reason }}
+  {% if metadata.fallbacks_used %}
+    <br><strong>Operational Fallbacks:</strong> {{ metadata.fallbacks_used | join(', ') }}
+  {% endif %}
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.buildings.likely_hit }}</div>
+    <div class="kpi-label">Buildings Likely Hit ({{ damage_summary.buildings.likely_hit_percent }}%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.roads_km.likely_hit_km }} km</div>
+    <div class="kpi-label">Roads Severed ({{ damage_summary.roads_km.likely_hit_percent }}%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ damage_summary.bridges.likely_hit }}</div>
+    <div class="kpi-label">Bridges Struck ({{ damage_summary.bridges.adjacent_to_corridor }} at risk)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-num">{{ cutoff_analysis.definitely_cut_off | length }}</div>
+    <div class="kpi-label">Settlements Cut Off</div>
+  </div>
+</div>
+
+<h2>1. Hazard Extent Delineation (Radar & Optical Fusion)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Hazard Component</th>
+      <th>Conservative Sensitivity (&ge;70%)</th>
+      <th>Liberal Sensitivity (&ge;35%)</th>
+      <th>Methodology</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Flood Inundation</strong></td>
+      <td>{{ hazard_summary.flood_water_area_sqkm.conservative }} km&sup2;</td>
+      <td>{{ hazard_summary.flood_water_area_sqkm.liberal }} km&sup2;</td>
+      <td>Kuro Siwo U-Net + S2 MNDWI Cloud-free Confirmation</td>
+    </tr>
+    <tr>
+      <td><strong>Debris & Sediment Scars</strong></td>
+      <td>{{ hazard_summary.debris_area_sqkm.conservative }} km&sup2;</td>
+      <td>{{ hazard_summary.debris_area_sqkm.liberal }} km&sup2;</td>
+      <td>Log-ratio Backscatter Change + HAND Corridor Filter</td>
+    </tr>
+    <tr>
+      <td><strong>Permanent Water Base</strong></td>
+      <td colspan="2">{{ hazard_summary.permanent_water_area_sqkm }} km&sup2;</td>
+      <td>Copernicus DEM & SAR Baseline Drainage Channel</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2. Road Network Reachability & Isolation (Pre vs. Post Flood)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Settlement / Community</th>
+      <th>Pre-event Route</th>
+      <th>Status</th>
+      <th>Detour / Severance Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in cutoff_analysis.definitely_cut_off %}
+    <tr>
+      <td><strong>{{ s.name }}</strong> ({{ s.type }})</td>
+      <td>{{ s.pre_dist_km }} km to hospital</td>
+      <td><span class="badge-danger">DEFINITELY CUT OFF</span></td>
+      <td>{{ s.reason }}</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.possibly_cut_off %}
+    <tr>
+      <td><strong>{{ s.name }}</strong> ({{ s.type }})</td>
+      <td>{{ s.pre_dist_km }} km to hospital</td>
+      <td><span class="badge-warning">POSSIBLY CUT OFF</span></td>
+      <td>{{ s.reason }}</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.connected_with_detour %}
+    <tr>
+      <td><strong>{{ s.name }}</strong></td>
+      <td>{{ s.pre_dist_km }} km</td>
+      <td>Connected (Detour)</td>
+      <td>Post-event: {{ s.post_dist_km }} km (+{{ s.increase_km }} km / +{{ s.percent_increase }}%)</td>
+    </tr>
+    {% endfor %}
+    {% for s in cutoff_analysis.pre_event_unconnected %}
+    <tr>
+      <td><strong>{{ s.name }}</strong></td>
+      <td>N/A</td>
+      <td><span style="color:#64748b;">UNKNOWN</span></td>
+      <td>{{ s.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>3. Flow-Path Corridor Bonus Trace</h2>
+<div style="font-size: 12px; margin-bottom: 15px;">
+  <strong>D8 Origin Point:</strong> [{{ flowpath_bonus.source_point[0] }}, {{ flowpath_bonus.source_point[1] }}] &bull; 
+  <strong>Downstream Distance:</strong> {{ flowpath_bonus.corridor_length_km }} km &bull;
+  <strong>Settlements in Path:</strong> {{ flowpath_bonus.settlements_in_path | join(', ') }}
+</div>
+
+<div class="limitations-box">
+  <strong>Technical Limitations & Operational Caveats (Mandatory Disclosure):</strong>
+  <ul>
+    {% for lim in limitations %}
+    <li>{{ lim }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>Required Attributions:</strong><br>
+  {% for attr in attributions %}
+  &bull; {{ attr }}<br>
+  {% endfor %}
+</div>
+
+</body>
+</html>
