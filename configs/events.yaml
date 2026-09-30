@@ -1,0 +1,38 @@
+# Historical & Validation Disaster Events Configuration
+# Demonstrates out-of-distribution generalization across the Himalayan Arc
+events:
+  trishuli:
+    name: "Aug 2026 Trishuli Flood & Landslide Torrent"
+    country: "Nepal"
+    hazard_type: "Monsoon riverine flood + debris flow"
+    bbox: [85.12, 27.92, 85.32, 28.14] # [West, South, East, North]
+    event_date: "2026-08-05"
+    s1_orbit: 85
+    description: "Primary case study validated against Copernicus Emergency Management Service EMSR927."
+
+  chamoli:
+    name: "Feb 2021 Chamoli Rock/Ice Avalanche & Flash Flood"
+    country: "India (Uttarakhand)"
+    hazard_type: "Rock-ice avalanche + GLOF + hyper-concentrated debris torrent"
+    bbox: [79.65, 30.35, 79.85, 30.55]
+    event_date: "2021-02-07"
+    s1_orbit: 121
+    description: "Ronti peak hanging glacier collapse triggering catastrophic surge through Rishiganga and Dhauliganga gorges."
+
+  melamchi:
+    name: "June 2021 Melamchi Debris Flood"
+    country: "Nepal (Sindhupalchok)"
+    hazard_type: "Massive debris torrent + riverbed aggradation"
+    bbox: [85.50, 27.80, 85.65, 28.05]
+    event_date: "2021-06-15"
+    s1_orbit: 85
+    description: "Upstream slope collapse depositing up to 10-15m sediment, destroying bridges and drinking water intake."
+
+  lhonak:
+    name: "Oct 2023 South Lhonak Glacial Lake Outburst Flood (GLOF)"
+    country: "India (Sikkim)"
+    hazard_type: "Glacial lake moraine dam breach + Teesta flood"
+    bbox: [88.15, 27.65, 88.65, 28.05]
+    event_date: "2023-10-04"
+    s1_orbit: 56
+    description: "Moraine dam breach of South Lhonak lake washing away Chungthang Hydroelectric Dam and downstream connectivity."

@@ -92,6 +92,7 @@ def export_geopackage(pipeline_data: dict, output_gpkg: str):
 
 def main():
     parser = argparse.ArgumentParser(description="Flood Damage Mapping from Space (15-Day Rapid Operational Pipeline)")
+    parser.add_argument("--event", type=str, default=None, choices=["trishuli", "chamoli", "melamchi", "lhonak"], help="Preset disaster event: trishuli, chamoli, melamchi, or lhonak")
     parser.add_argument("--bbox", type=parse_bbox, default=None, help="AOI Bounding Box: West,South,East,North (e.g. 85.12,27.92,85.32,28.14)")
     parser.add_argument("--date", type=str, default=None, help="Flood event date: YYYY-MM-DD")
     parser.add_argument("--config", type=str, default="configs/config.yaml", help="Path to config.yaml")
@@ -112,10 +113,29 @@ def main():
     with open(args.config, "r") as f:
         config = yaml.safe_load(f)
 
-    # Set parameters: CLI overrides config default
+    # Resolve event presets if specified
+    event_name = config.get("project", {}).get("case_study", "Flood Damage Assessment")
     default_aoi = config.get("default_aoi", {})
-    bbox = args.bbox if args.bbox is not None else default_aoi.get("bbox", [85.12, 27.92, 85.32, 28.14])
-    event_date = args.date if args.date is not None else default_aoi.get("event_date", "2026-08-05")
+    bbox = default_aoi.get("bbox", [85.12, 27.92, 85.32, 28.14])
+    event_date = default_aoi.get("event_date", "2026-08-05")
+
+    if args.event:
+        events_file = "configs/events.yaml"
+        if os.path.exists(events_file):
+            with open(events_file, "r") as ef:
+                all_events = yaml.safe_load(ef).get("events", {})
+                if args.event in all_events:
+                    ev_info = all_events[args.event]
+                    bbox = ev_info["bbox"]
+                    event_date = ev_info["event_date"]
+                    event_name = ev_info["name"]
+                    logger.info(f"Loaded Disaster Preset: {event_name} ({ev_info['country']})")
+
+    # CLI explicit bbox/date overrides preset
+    if args.bbox is not None:
+        bbox = args.bbox
+    if args.date is not None:
+        event_date = args.date
 
     logger.info(f"Target AOI Bbox : {bbox}")
     logger.info(f"Flood Event Date: {event_date}")

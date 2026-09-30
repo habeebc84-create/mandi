@@ -1176,6 +1176,12 @@ def get_status():
         "results_ready": os.path.exists(RESULTS_PATH)
     }
 
+@app.get("/api/copilot/query")
+def copilot_query(q: str, lang: str = "en"):
+    from app.copilot import DisasterCopilot
+    copilot = DisasterCopilot(RESULTS_PATH)
+    return copilot.answer_query(q, lang=lang)
+
 @app.get("/api/results")
 def get_results():
     if os.path.exists(RESULTS_PATH):

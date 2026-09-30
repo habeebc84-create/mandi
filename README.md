@@ -26,16 +26,34 @@ pip install -r requirements.txt
 ### Execution
 The judges choose the bounding box and event date on the day of the evaluation. **Nothing is hard-coded to Trishuli**:
 ```bash
-# Run with arbitrary coordinates and date:
+# 1. Run with arbitrary coordinates and date:
 python run.py --bbox 85.12,27.92,85.32,28.14 --date 2026-08-05
+
+# 2. Or run historical Himalayan disaster presets:
+python run.py --event trishuli   # Aug 2026 Trishuli Flood, Nepal (EMSR927 baseline)
+python run.py --event chamoli    # Feb 2021 Chamoli Avalanche & Flash Flood, India
+python run.py --event melamchi   # June 2021 Melamchi Debris Torrent, Nepal
+python run.py --event lhonak     # Oct 2023 South Lhonak GLOF, Sikkim
 ```
 
-### View Interactive Dashboard
-Launch the Leaflet/FastAPI operational command center:
+### Multi-Event Generalization Benchmark
+Prove the pipeline generalizes across the Himalayan Arc without parameter tuning:
+```bash
+python pipeline/multi_event_bench.py
+```
+
+### Clean-Machine Day 15 Dry-Run Verification
+Execute the full automated test suite, integration run, and output artifact check:
+```bash
+python scripts/dry_run.py
+```
+
+### View Interactive 3D & 2D Dashboard
+Launch the Three.js WebGL and Leaflet operational command center:
 ```bash
 python app/dashboard/app.py
 ```
-Open **`http://localhost:8000`** in your browser to inspect hazard layers, sensitivity sliders, damaged buildings/roads, cut-off villages, and trace downstream D8 flow paths.
+Open **`http://localhost:8000`** in your browser to inspect 3D terrain meshes, dynamic flood height surge sliders, hazard layers, damaged buildings/roads, cut-off villages, and D8 flow paths.
 
 ### Independent Benchmark Validation (Disqualification Wall)
 Validate pipeline results against Copernicus EMS EMSR927:

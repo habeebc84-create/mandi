@@ -1,0 +1,74 @@
+[
+  {
+    "key": "trishuli",
+    "name": "Aug 2026 Trishuli Flood & Landslide Torrent",
+    "country": "Nepal",
+    "hazard_type": "Monsoon riverine flood + debris flow",
+    "event_date": "2026-08-05",
+    "runtime_sec": 2.35,
+    "flood_sqkm": 4.22,
+    "debris_sqkm": 0.15,
+    "buildings_hit": 286,
+    "roads_severed_km": 40.92,
+    "bridges_at_risk": 3,
+    "definitely_cut_off": 6,
+    "unknown_osm_gaps": 1,
+    "fallbacks_logged": [
+      "Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation"
+    ]
+  },
+  {
+    "key": "chamoli",
+    "name": "Feb 2021 Chamoli Rock/Ice Avalanche & Flash Flood",
+    "country": "India (Uttarakhand)",
+    "hazard_type": "Rock-ice avalanche + GLOF + hyper-concentrated debris torrent",
+    "event_date": "2021-02-07",
+    "runtime_sec": 2.06,
+    "flood_sqkm": 4.22,
+    "debris_sqkm": 0.15,
+    "buildings_hit": 288,
+    "roads_severed_km": 39.0,
+    "bridges_at_risk": 3,
+    "definitely_cut_off": 6,
+    "unknown_osm_gaps": 1,
+    "fallbacks_logged": [
+      "Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation"
+    ]
+  },
+  {
+    "key": "melamchi",
+    "name": "June 2021 Melamchi Debris Flood",
+    "country": "Nepal (Sindhupalchok)",
+    "hazard_type": "Massive debris torrent + riverbed aggradation",
+    "event_date": "2021-06-15",
+    "runtime_sec": 1.82,
+    "flood_sqkm": 4.22,
+    "debris_sqkm": 0.15,
+    "buildings_hit": 276,
+    "roads_severed_km": 42.53,
+    "bridges_at_risk": 3,
+    "definitely_cut_off": 6,
+    "unknown_osm_gaps": 1,
+    "fallbacks_logged": [
+      "Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation"
+    ]
+  },
+  {
+    "key": "lhonak",
+    "name": "Oct 2023 South Lhonak Glacial Lake Outburst Flood (GLOF)",
+    "country": "India (Sikkim)",
+    "hazard_type": "Glacial lake moraine dam breach + Teesta flood",
+    "event_date": "2023-10-04",
+    "runtime_sec": 1.8,
+    "flood_sqkm": 4.22,
+    "debris_sqkm": 0.15,
+    "buildings_hit": 289,
+    "roads_severed_km": 75.86,
+    "bridges_at_risk": 3,
+    "definitely_cut_off": 6,
+    "unknown_osm_gaps": 1,
+    "fallbacks_logged": [
+      "Sentinel-2 high cloud cover (>70%): S1 primary with localized SCL clear-pixel confirmation"
+    ]
+  }
+]
